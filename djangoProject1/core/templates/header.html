@@ -1,16 +1,20 @@
 <header xmlns="http://www.w3.org/1999/html">
     <nav>
         <p>
-            <a  href="{% url 'home' %}">Home</a>
+            <a href="{% url 'home' %}">Home</a>
             <a href="{% url 'about' %}">About</a>
             <a href="{% url 'contacts' %}">Contacts</a>
+            <a href="{% url 'recipe_menu' %}">Recipes</a>
+{#            <a href="{% url 'search' %}">Search contacts</a>#}
+
             {% if user.is_authenticated %}
-                <p align="right"><a href="{% url 'profile' %}">Profile</a>
+                <a href="{% url 'recipe_create' %}">add new recipe</a>
+                <p align="right">
+                <a href="{% url 'profile' %}">Profile</a>
                 <form action="{% url 'logout' %}" method="post", align="right">
                     {% csrf_token %}
                     <button type="submit">Logout</button>        <!-- allign and frontend will do later with CSS-->
                 </form>
-                </p>
             {% else %}
                 <p align="right">
                 <a href="{% url 'login' %}">Login</a>

@@ -1,0 +1,18 @@
+{% extends "master.html" %}
+
+{% block main %}
+  <h1>Recipes</h1>
+
+  <ul>
+    {% for recipe in page_obj %}
+      <li>
+        <a href="{% url 'recipe_detail' recipe.pk %}">
+          {{ recipe.name }} {{ recipe.difficulty }}
+        </a>
+      </li>
+    {% empty %}
+      <p>No food >:{.</p>
+    {% endfor %}
+  </ul>
+
+{% endblock %}
