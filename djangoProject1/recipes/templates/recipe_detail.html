@@ -3,12 +3,21 @@
 {% block main %}
     <h1>{{ object.name }}</h1>
     <h2>ingredients:</h2>
-    {% for ingredient in object.ingredients %}
-        <input type="checkbox">{{ ingredient }}<br>
-    {% endfor %}
+    <p id="dumper"></p>
     <h2>progress: {{ object.instructions }}</h2>
 
-{#<a href="{% url 'contact_update' object.pk %}">Update</a>#}
-{#<a href="{% url 'contact_delete' object.pk %}">Delete</a>#}
+{% if user.id  == object.author.id or user.is_superuser %}
+
+    <a href="{% url 'recipe_update' object.pk %}">Update</a>
+    <a href="{% url 'recipe_delete' object.pk %}">Delete</a>
+
+{% endif %}
 <a href="{% url 'recipe_menu' %}">Back</a>
+{% load static %}
+    <script src="{% static 'JS/text_split.js' %}"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function(event) {
+        split("{{ object.ingredients }}");
+    });
+    </script>
 {% endblock main %}

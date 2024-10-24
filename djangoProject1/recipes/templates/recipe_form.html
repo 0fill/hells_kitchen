@@ -1,7 +1,7 @@
 {% extends "master.html" %}
 
 {% block main %}
-<h1>Crete new contact</h1>
+<h1>Post new recipe</h1>
     <form method="POST">
         {% csrf_token %}
         {{ form.as_p }}
