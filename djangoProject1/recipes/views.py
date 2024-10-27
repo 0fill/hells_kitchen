@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DeleteView, UpdateView, ListView
 from .models import Recipe
-from .forms import RecipeForm
+from .forms import RecipeForm, RecipeSearchForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 import os
 from django.http import FileResponse, JsonResponse
@@ -40,3 +40,17 @@ class RecipeDeleteView(LoginRequiredMixin, DeleteView):
     model = Recipe
     template_name = 'recipe_delete.html'
     success_url = reverse_lazy('recipe_menu')
+
+def search_recipe(request):
+    if request.method == 'POST':
+        form = RecipeSearchForm(request.POST)
+        if form.is_valid():
+            recipe_name = form.cleaned_data['recipe_name']
+            recipe_difficulty = form.cleaned_data['recipe_difficulty']
+            results = Recipe.objects.filter(name__icontains=recipe_name) | Recipe.objects.filter(difficulty__icontains=recipe_difficulty)
+            return render(request, 'search_results.html', {'form': form, 'results': results})
+    else:
+        form = RecipeSearchForm()
+
+    results = Recipe.objects.all()
+    return render(request, 'search_results.html', {'form': form, 'results': results})

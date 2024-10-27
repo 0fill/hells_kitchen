@@ -1,0 +1,23 @@
+{% extends "master.html" %}
+
+{% block main %}
+<div class="main-content">
+    <h1>Search Recipes</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="button">Search</button>
+    </form>
+
+    <input type="text" id="search-input" placeholder="Filter recipes by name or difficulty">
+
+    <h2>Results:</h2>
+    <ul id="recipe-list">
+        {% for product in results %}
+            <li class="recipe-item">{{ product.name }} - {{ product.difficulty }}</li>
+        {% empty %}
+            <li>No recipes found</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

@@ -2,11 +2,16 @@
 
 {% block main %}
   <h1>Recipes</h1>
+    <form id="search_form">
+        <input type="text" id="search_name" placeholder="Name">
+        <input type="number" id="search_diff" placeholder="Difficulty">
+        <button type="button" onclick="search()">Search</button>
+    </form>
 
   <ul>
     {% for recipe in page_obj %}
       <li>
-        <a href="{% url 'recipe_detail' recipe.pk %}">
+        <a href="{% url 'recipe_detail' recipe.pk %}" >
           {{ recipe.name }}-{{ recipe.difficulty }}
         </a>
       </li>
