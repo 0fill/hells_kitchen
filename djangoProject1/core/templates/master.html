@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+{% load static %}
+<link href="{% static 'CSS/main_style.css' %}" rel="stylesheet"><head>
 
     <title>{% block title %}{% endblock %}</title>
 </head>
 <body>
     {% include "header.html" %}
-
+<div class="main-content">
     {% block main %}
     {% endblock main %}
-
+</div>
     {% include "footer.html" %}
 </body>
 </html>

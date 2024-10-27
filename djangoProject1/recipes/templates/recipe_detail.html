@@ -4,7 +4,7 @@
     <h1>{{ object.name }}</h1>
     <h2>ingredients:</h2>
     <p id="dumper"></p>
-    <h2>progress: {{ object.instructions }}</h2>
+    <h5>progress: {{ object.instructions }}</h5>
 
 {% if user.id  == object.author.id or user.is_superuser %}
 

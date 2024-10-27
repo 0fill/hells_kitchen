@@ -1,4 +1,9 @@
-<footer>
-    <hr>
-    <p>Copyright &copy; 2024 hell yea kitchen &reg;</p>
+ {% load static %}
+    <link href="{% static 'CSS/footer_style.css' %}" rel="stylesheet">
+<footer class="footer">
+     <p>© 2024 stukyn. All rights reserved.</p>
+        <p>
+            {% load static %}
+            <a href="{% static 'files/Privacypolicy.pdf' %}" download = "Privacy_Policy.pdf" class="pr_po">Privacy Policy</a>
+        </p>
 </footer>

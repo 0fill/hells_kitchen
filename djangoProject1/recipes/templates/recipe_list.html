@@ -7,7 +7,7 @@
     {% for recipe in page_obj %}
       <li>
         <a href="{% url 'recipe_detail' recipe.pk %}">
-          {{ recipe.name }} {{ recipe.difficulty }}
+          {{ recipe.name }}-{{ recipe.difficulty }}
         </a>
       </li>
     {% empty %}
