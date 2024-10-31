@@ -49,7 +49,25 @@ a{
 
 .registr_login_allign{
     display: flex;
-    flex-direction: column;
-    align-items: flex-end;
+    flex-direction: row; /* will be in collum */
+    justify-content: flex-end; /* align buttons to the right */
+    align-items: center; /* centers buttons */
     gap: 10px;
+}
+
+header{
+    display: flex;
+    justify-content: flex-start;
+    /*align-items: center;*/
+}
+
+.navbar{
+    flex-grow: 1;
+    justify-content: flex-start;
+}
+
+.img_class:hover{
+    background-color: unset;
+    color: unset;
+    border: unset;
 }

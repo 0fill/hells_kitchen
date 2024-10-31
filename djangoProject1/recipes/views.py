@@ -41,16 +41,21 @@ class RecipeDeleteView(LoginRequiredMixin, DeleteView):
     template_name = 'recipe_delete.html'
     success_url = reverse_lazy('recipe_menu')
 
+
 def search_recipe(request):
+    form = RecipeSearchForm()
+    results = Recipe.objects.all()  # Initialize results early to avoid UnboundLocalError
+
     if request.method == 'POST':
         form = RecipeSearchForm(request.POST)
         if form.is_valid():
-            recipe_name = form.cleaned_data['recipe_name']
-            recipe_difficulty = form.cleaned_data['recipe_difficulty']
-            results = Recipe.objects.filter(name__icontains=recipe_name) | Recipe.objects.filter(difficulty__icontains=recipe_difficulty)
-            return render(request, 'search_results.html', {'form': form, 'results': results})
-    else:
-        form = RecipeSearchForm()
+            recipe_name = form.cleaned_data.get('recipe_name', '')
+            recipe_difficulty = form.cleaned_data.get('recipe_difficulty', None)
 
-    results = Recipe.objects.all()
+            if recipe_name:
+                results = results.filter(name__icontains=recipe_name)
+
+            if recipe_difficulty is not None:
+                results = results.filter(difficulty=recipe_difficulty)
+
     return render(request, 'search_results.html', {'form': form, 'results': results})

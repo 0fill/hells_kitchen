@@ -2,19 +2,21 @@
 
 {% block main %}
 <div class="main-content">
-    <h1>Search Recipes</h1>
-    <form method="post">
+    <h1>Recipes</h1>
+    <form method="post" action="{% url 'search' %}">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit" class="button">Search</button>
+        <button type="submit">Search</button>
     </form>
 
-    <input type="text" id="search-input" placeholder="Filter recipes by name or difficulty">
-
-    <h2>Results:</h2>
+    <h2>Search Results</h2>
     <ul id="recipe-list">
-        {% for product in results %}
-            <li class="recipe-item">{{ product.name }} - {{ product.difficulty }}</li>
+        {% for recipe in results %}
+            <li>
+                <a href="{% url 'recipe_detail' recipe.pk %}">
+                    {{ recipe.name }} - {{ recipe.difficulty }}
+                </a>
+            </li>
         {% empty %}
             <li>No recipes found</li>
         {% endfor %}

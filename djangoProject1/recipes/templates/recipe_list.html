@@ -2,10 +2,11 @@
 
 {% block main %}
   <h1>Recipes</h1>
-    <form id="search_form">
-        <input type="text" id="search_name" placeholder="Name">
-        <input type="number" id="search_diff" placeholder="Difficulty">
-        <button type="button" onclick="search()">Search</button>
+    <form id="search_form" method="POST" action="{% url 'search' %}">
+        {% csrf_token %}
+        <input type="text" id="search_name" name="recipe_name" placeholder="Name">
+        <input type="number" id="search_difficulty" name="recipe_difficulty" placeholder="Difficulty">
+        <button type="submit">Search</button>
     </form>
 
   <ul>
