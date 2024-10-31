@@ -7,7 +7,7 @@ import json
 
 class Recipe(models.Model):
     name = models.CharField(max_length=255)
-    ingredients = models.CharField(max_length=1024)
+    ingredients = models.CharField(max_length=1024, help_text="separated by comma")
     instructions = models.TextField()
     difficulty = models.IntegerField(choices=[(i, i) for i in range(1, 11)], default=1)
     author = models.ForeignKey(User, on_delete=models.CASCADE)

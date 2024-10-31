@@ -12,11 +12,14 @@ from .models import User, User_Recipe
 def HomePage(request):
     return render(request, 'home.html')
 
+
 def AboutPage(request):
     return render(request, 'about.html')
 
+
 def ContactPage(request):
     return render(request, 'contact.html')
+
 
 def registration(request):
     if request.method == 'POST':
@@ -29,20 +32,23 @@ def registration(request):
                   'registration.html',
                   {'form': UserCreationForm()})
 
+
 @login_required
 def profile(request):
-    return render(request, "profile.html")
+    user = request.user
+    recipes = Recipe.objects.filter(author=user)
+    return render(request, 'profile.html', {'user': user, 'recipes': recipes})
+
+
+
 
 @login_required
 def add_bookmark(request, recipe_id):
     recipe = Recipe.objects.get(id=recipe_id)
     User_Recipe.objects.create(user=request.user, recipe=recipe)
-    return redirect('recipe_detail', recipe_id=recipe_id)       #have to modifi
-
-
+    return redirect('recipe_detail', recipe_id=recipe_id)  # have to modifi
 
 # def delete_url(request, id):
 #     queryset = User.objects.get(id=id)
-    # queryset.delete()
-    # return redirect('/')
-
+# queryset.delete()
+# return redirect('/')
