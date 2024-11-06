@@ -1,5 +1,9 @@
 {% extends "master.html" %}
 
+{% block title %}
+	STUKYN
+{% endblock %}
+
 {% block main %}
   <h1>Recipes</h1>
     <form id="search_form" method="POST" action="{% url 'search' %}">

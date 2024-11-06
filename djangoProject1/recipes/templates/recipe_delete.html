@@ -1,5 +1,9 @@
 {% extends "master.html" %}
 
+{% block title %}
+	STUKYN
+{% endblock %}
+
 {% block main %}
     <h1>Are you sure you want to delete "{{ object.name }}"?</h1>
     <form method="post">

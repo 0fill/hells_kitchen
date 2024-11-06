@@ -36,8 +36,16 @@ def registration(request):
 @login_required
 def profile(request):
     user = request.user
+    sort_by = request.GET.get('sort', 'name')
     recipes = Recipe.objects.filter(author=user)
-    return render(request, 'profile.html', {'user': user, 'recipes': recipes})
+    if sort_by == 'created_at':
+        return render(request, 'profile.html', {'user': user, 'recipes': recipes,
+                                                'sort_by': 'created_at'})
+    if sort_by not in ['name', 'difficulty']:
+        sort_by = 'name'
+    recipes = recipes.order_by(sort_by)
+    return render(request, 'profile.html', {'user': user, 'recipes': recipes,
+                  'sort_by': sort_by})
 
 
 

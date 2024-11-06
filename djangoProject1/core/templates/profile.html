@@ -1,13 +1,25 @@
 {% extends "master.html" %}
 
+{% block title %}
+    PROFILE
+{% endblock title %}
 {% block main %}
     <h1>Profile PAGE</h1>
     <h2>{{ user.username }}</h2>
+    <form method="get" action="{% url 'profile' %}">
+    <label for="sort">Sort by:</label>
+    <select name="sort" id="sort">
+        <option value="name" {% if sort_by == 'name' %}selected{% endif %}>Name</option>
+        <option value="created_at" {% if sort_by == 'created_at' %}selected{% endif %}>Creation Date</option>
+        <option value="difficulty" {% if sort_by == 'difficulty' %}selected{% endif %}>Difficulty</option>
+    </select>
+    <button type="submit">Sort</button>
+    </form>
     <h3>Created Recipes</h3>
-    <ul>
+     <ul>
         {% for recipe in recipes %}
             <li>
-                <a href="{% url 'recipe_detail' recipe.pk %}">{{ recipe.name }}</a>
+                <a href="{% url 'recipe_detail' recipe.pk %}">{{ recipe.name }} - {{ recipe.difficulty }}</a>
             </li>
         {% empty %}
             <li>No recipes created yet.</li>

@@ -55,7 +55,7 @@ def search_recipe(request):
             if recipe_name:
                 results = results.filter(name__icontains=recipe_name)
 
-            if recipe_difficulty is not None:
-                results = results.filter(difficulty=recipe_difficulty)
+            if recipe_difficulty is not None and recipe_difficulty is not "":
+                results = results.filter(difficulty__in=recipe_difficulty)
 
     return render(request, 'search_results.html', {'form': form, 'results': results})

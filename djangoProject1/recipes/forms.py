@@ -11,14 +11,15 @@ class RecipeForm(forms.ModelForm):
 class RecipeSearchForm(forms.Form):
     recipe_name = forms.CharField(required=False, label='Recipe Name')
     RECIPE_DIFFICULTY_CHOICES = [('', 'None')] + [(str(i), str(i)) for i in range(1, 11)]
-    recipe_difficulty = forms.ChoiceField(
+    recipe_difficulty = forms.MultipleChoiceField(
         choices=RECIPE_DIFFICULTY_CHOICES,
         label='Recipe Difficulty',
-        required=False
+        required=False,
+        widget=forms.CheckboxSelectMultiple,
     )
 
     def clean_recipe_difficulty(self):
         data = self.cleaned_data['recipe_difficulty']
-        if data == "":
+        if "" in data:
             return None
         return data

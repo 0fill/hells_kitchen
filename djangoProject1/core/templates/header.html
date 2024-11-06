@@ -14,12 +14,11 @@
 
         {% if user.is_authenticated %}
             <a href="{% url 'recipe_create' %}" class="">Add new recipe</a>
-            {#            <a href="{% url 'search' %}">Search contacts</a>#}
         {% endif %}
     </div>
     <div class="registr_login_allign">
         {% if user.is_authenticated %}
-            <a href="{% url 'profile' %}" class="login_button">user.name</a>
+            <a href="{% url 'profile' %}" class="login_button">{{ user.username }}</a>
             <form action="{% url 'logout' %}" method="post">
                 {% csrf_token %}
                 <gg class="registr_login_allign">
